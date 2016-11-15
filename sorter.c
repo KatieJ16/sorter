@@ -10,6 +10,7 @@
 int minimum_element_sort(int array[], int num_elements);
 int bubble_sort(int array[], int num_elements);
 
+#define MAX_NUM_ELEMENTS 32
 /* Sorts elements of an array using minimum element sort.
  * Parameters are the array of integers which is to be sorter 
  * and the number os elements in the array.
@@ -37,6 +38,13 @@ int minimum_element_sort(int array[], int num_elements) {
         array[smallest] = temp;
         start ++;
     }
+
+    /* Check that the array is sorted correctly. */
+
+    for (index = 1; index < num_elements; index++) {
+        assert(array[index] >= array[index - 1]);
+    }
+
     return 0;
 }
 
@@ -63,6 +71,12 @@ int bubble_sort(int array[], int num_elements) {
             }
         }
     }
+    /* Check that the array is sorted correctly. */
+
+    for (index = 1; index < num_elements; index++) {
+        assert(array[index] >= array[index - 1]);
+    }
+
     return 0;
 }
 
@@ -70,7 +84,7 @@ int bubble_sort(int array[], int num_elements) {
 int main(int argc, char *argv[]) {
     int index;
     int num_elements = 0;
-    int input_array[32];
+    int input_array[MAX_NUM_ELEMENTS];
     int input_array_index = 0;
     int to_print = 1;
     int bubble = 0;
@@ -85,7 +99,7 @@ int main(int argc, char *argv[]) {
         }
         else {
             /* Check for correct number of inputs and exit if necessary. */
-            if( (num_elements >= 32)) {
+            if( (num_elements >= MAX_NUM_ELEMENTS)) {
                 fprintf(stderr, \
                     "usage: %s should have between 1 and 32 integers.\n", \
                     argv[0]);
@@ -99,7 +113,7 @@ int main(int argc, char *argv[]) {
     }
     
     /* Check for correct number of inputs and exit if necessary. */
-    if((num_elements == 0) | (num_elements > 33)) {
+    if((num_elements == 0) | (num_elements > MAX_NUM_ELEMENTS + 1)) {
         fprintf(stderr, \
                 "usage: %s should have between 1 and 32 integers.\n", \
                 argv[0]);
